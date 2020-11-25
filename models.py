@@ -14,10 +14,10 @@ class ProgCategory(models.Model):
         return self.Category_title
 
 
-class ProgSeries(models.Model):
+class (models.Model):
     prog_series = models.CharField(max_length=50)
-    Category_title = models.ForeignKey(ProgCategory,default = 1,verbose_name= "Category" , on_delete=models.SET_DEFAULT)
-    series_summary = models.CharField(max_length=200)
+    Category_title = models.ManyToManyField(ProgCategory)
+    #series_summary = models.CharField(max_length=200)
 
     class Meta:
         verbose_name ="Series"
@@ -30,11 +30,13 @@ class programs(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField
     date = models.DateTimeField(auto_now_add=True)
-    prog_series = models.ForeignKey(ProgSeries, default=1, verbose_name="Series", on_delete=models.SET_DEFAULT)
+    prog_series = models.ManyToManyField(ProgSeries)
     prog_slug = models.CharField(max_length=100, default=1)
 
 
 
     def __str__(self):
         return self.title
+
+
 
