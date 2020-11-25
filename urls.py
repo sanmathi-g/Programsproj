@@ -1,9 +1,13 @@
-from django.urls import path
-from .views import GenericAPIView
+from django.conf.urls import url,include
+from .views import ProgCategoryviewsets,ProgSeriesviewsets,programsviewsets
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+router.register(r'ProgramCatogary', ProgCategoryviewsets,basename="Catogary")
+router.register(r'ProgramSeries', ProgSeriesviewsets,basename="Series")
+router.register(r'Programs', programsviewsets, basename="programs")
+
 
 urlpatterns = [
-
-    path('generic/programs/', GenericAPIView.as_view()),
-    path('generic/programs/<int:id>/', GenericAPIView.as_view()),
-
+    url('', include(router.urls)),
 ]
