@@ -1,12 +1,35 @@
-from .models import programs
-from .serializers import programsSerializer
-from rest_framework import generics
-from rest_framework import mixins
-from rest_framework.authentication import TokenAuthentication, BasicAuthentication
-from rest_framework.permissions import IsAuthenticated
+from .models import programs,ProgCategory,ProgSeries
+from .serializers import programsSerializer,ProgCategorySerializer,ProgSeriesSerializer
+from rest_framework.response import Response
+from rest_framework import viewsets
+#from rest_framework import generics
+#from rest_framework import mixins
+#from rest_framework.authentication import TokenAuthentication, BasicAuthentication
+#from rest_framework.permissions import IsAuthenticated
+
+class ProgCategoryviewsets(viewsets.ModelViewSet):
+    serializer_class = ProgCategorySerializer
+
+    def get_queryset(self):
+        progCategory = ProgCategory.objects.all()
+        return progCategory
+
+class ProgSeriesviewsets(viewsets.ModelViewSet):
+    serializer_class = ProgSeriesSerializer
+
+    def get_queryset(self):
+        progSeries = ProgSeries.objects.all()
+        return progSeries
+
+class programsviewsets(viewsets.ModelViewSet):
+    serializer_class = programsSerializer
+
+    def get_queryset(self):
+        Programs = programs.objects.all()
+        return Programs
 
 
-
+'''
 class GenericAPIView(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin,
                      mixins.UpdateModelMixin, mixins.RetrieveModelMixin,
                      mixins.DestroyModelMixin):
@@ -33,3 +56,4 @@ class GenericAPIView(generics.GenericAPIView, mixins.ListModelMixin, mixins.Crea
 
     def delete(self, request, id):
         return self.destroy(request, id)
+'''
