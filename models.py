@@ -14,7 +14,7 @@ class ProgCategory(models.Model):
         return self.Category_title
 
 
-class (models.Model):
+class ProgSeries(models.Model):
     prog_series = models.CharField(max_length=50)
     Category_title = models.ManyToManyField(ProgCategory)
     #series_summary = models.CharField(max_length=200)
